@@ -99,8 +99,6 @@ The test generalises directly to the real problem: train an emulator on convecti
 
 Generated 2026-10-07T13:50:45+00:00 by downscaling-shift-test 0.1.0 (Python 3.13.16) in 67.9 s. Seed 7. The full configuration is stored in results.json; rerunning with the same configuration reproduces these numbers.
 
-AI assistance: the code and the report template in this repository were written with the help of an AI assistant (Claude, Anthropic) and reviewed by the author. All numbers are computed by the code at run time.
-
 ## References
 
 - Senior, C. A. et al. (2021). Convection-permitting regional climate change simulations for understanding future climate and informing decision-making in Africa. Bulletin of the American Meteorological Society, 102(6).
