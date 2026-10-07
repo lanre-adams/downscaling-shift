@@ -99,7 +99,6 @@ The test generalises directly to the real problem: train an emulator on convecti
 
 Generated 2026-10-07T13:53:20+00:00 by downscaling-shift-test 0.1.0 (Python 3.13.16) in 78.2 s. Seed 7. The full configuration is stored in results.json; rerunning with the same configuration reproduces these numbers.
 
-AI assistance: the code and the report template in this repository were written with the help of an AI assistant (Claude, Anthropic) and reviewed by the author. All numbers are computed by the code at run time.
 
 ## References
 
