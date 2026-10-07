@@ -138,8 +138,6 @@ results/         three pre-computed scenarios with reports
 - Hersbach, H. et al. (2020). The ERA5 global reanalysis. *QJRMS* 146(730).
 - Funk, C. et al. (2015). The climate hazards infrared precipitation with stations. *Scientific Data* 2, 150066.
 
-## Author and AI-use disclosure
-
 Olanrewaju (Lanre) Agunloye — built as a pre-application study for the UNRISK Centre for Doctoral Training. The code and report template were written with the help of an AI assistant (Claude, Anthropic) and reviewed by the author. Every number in the reports is computed by the code at run time.
 
 MIT licence.
