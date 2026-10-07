@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "downscaling-shift-test"
+version = "0.1.0"
+description = "Does an ML rainfall downscaler for West Africa survive a warmer climate? A distribution-shift test with dashboard and report."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Olanrewaju (Lanre) Agunloye" }]
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26", "scipy>=1.11", "scikit-learn>=1.4", "matplotlib>=3.8",
+  "pandas>=2.1", "xarray>=2024.1", "netCDF4>=1.6", "fastapi>=0.110", "uvicorn>=0.29",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "httpx>=0.27"]
+era5 = ["cdsapi>=0.7"]
+
+[project.scripts]
+shifttest = "shifttest.cli:main"
+
+[tool.setuptools]
+packages = ["shifttest"]
+
+[tool.setuptools.package-data]
+shifttest = ["web/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::RuntimeWarning"]

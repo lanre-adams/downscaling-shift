@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Downscaling Shift Test</title>
+<meta name="description" content="Does a machine-learning rainfall downscaler for West Africa survive a warmer climate? A distribution-shift test with report.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-row">
+    <span class="wordmark">Downscaling shift test</span>
+    <nav aria-label="Sections">
+      <a href="#explore">Results</a>
+      <a href="#maps">Maps</a>
+      <a href="#run" class="server-only">Run</a>
+      <a href="#report">Report</a>
+    </nav>
+    <span id="data-status" class="pill" hidden></span>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap">
+    <div class="hero-text">
+      <h1>Does it survive a warmer climate?</h1>
+      <p class="lede">A machine-learning model learns to turn coarse global-model weather into local rainfall for West Africa. It is trained on early years and then tested on later, warmer ones. If its skill holds only in the climate it was trained on, it cannot be trusted for projections.</p>
+      <p id="hero-finding" class="finding">Loading results…</p>
+    </div>
+    <figure class="hero-chart" aria-labelledby="hero-chart-title">
+      <figcaption id="hero-chart-title">
+        <strong>Predicted versus observed change in heavy rain</strong>
+        <span>Change in 99th-percentile daily rainfall from early to late years, in three synthetic worlds that warm at different rates. A good downscaler follows the dashed line.</span>
+      </figcaption>
+      <div id="hero-legend" class="legend"></div>
+      <div id="hero-svg" class="chart"></div>
+    </figure>
+  </section>
+
+  <section id="explore" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Explore a scenario</h2>
+        <div id="scenario-tabs" class="segmented" role="tablist" aria-label="Scenario"></div>
+      </div>
+      <p id="scenario-summary" class="summary"></p>
+
+      <div class="grid-2">
+        <figure class="panel wide">
+          <figcaption><strong>Scores by model</strong><span>Held-out early years against the shifted, warmer years.</span></figcaption>
+          <div class="table-wrap"><table id="score-table" class="data"></table></div>
+          <p id="interval-note" class="note"></p>
+        </figure>
+        <figure class="panel">
+          <figcaption><strong>Does the model reproduce the change?</strong><span>Change in 99th-percentile rainfall from early to late years. The observed bar is the target.</span></figcaption>
+          <div id="change-legend" class="legend"></div>
+          <div id="change-svg" class="chart"></div>
+        </figure>
+        <figure class="panel">
+          <figcaption><strong>Bias across the rainfall distribution, shifted years</strong><span>The upper tail of pixel-day rainfall, model relative to observed. Zero is unbiased.</span></figcaption>
+          <div id="qq-legend" class="legend"></div>
+          <div id="qq-svg" class="chart"></div>
+        </figure>
+        <figure class="panel wide">
+          <figcaption><strong>Spatial detail, shifted years</strong><span>Power spectrum of daily rainfall maps. A line below the observed one is too smooth at that scale.</span></figcaption>
+          <div id="spec-legend" class="legend"></div>
+          <div id="spec-svg" class="chart"></div>
+        </figure>
+      </div>
+      <details class="findings">
+        <summary>All findings for this scenario</summary>
+        <ul id="findings-list"></ul>
+      </details>
+    </div>
+  </section>
+
+  <section id="maps" class="wrap section">
+    <h2>Maps</h2>
+    <div id="figures"></div>
+  </section>
+
+  <section id="run" class="band server-only">
+    <div class="wrap run-grid">
+      <div>
+        <h2>Run your own scenario</h2>
+        <p>Choose how fast the synthetic world warms and run the full test. It takes one to three minutes; the result appears as “Your run” above.</p>
+      </div>
+      <form id="run-form" class="run-form">
+        <label for="f-preset">Starting settings</label>
+        <select id="f-preset" name="preset">
+          <option value="default">Standard (64 × 64 grid)</option>
+          <option value="quick">Quick (32 × 32 grid, faster)</option>
+        </select>
+        <label for="f-warming">Warming rate: <output id="f-warming-out">0.10</output> K per year</label>
+        <input id="f-warming" name="warming_rate" type="range" min="0" max="0.2" step="0.01" value="0.10">
+        <label for="f-seed">Random seed</label>
+        <input id="f-seed" name="seed" type="number" min="0" max="10000" value="7">
+        <label class="check"><input id="f-drywet" type="checkbox" checked> Include the dry-to-wet test</label>
+        <button id="run-btn" type="submit">Run scenario</button>
+        <div id="run-status" class="run-status" role="status" aria-live="polite"></div>
+        <div class="bar" aria-hidden="true"><span id="run-bar"></span></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="report" class="wrap section">
+    <div class="report-head">
+      <h2>Report</h2>
+      <div class="downloads">
+        <a id="dl-md" href="#" download>Download report (Markdown)</a>
+        <a id="dl-json" href="#" download>Download results (JSON)</a>
+      </div>
+    </div>
+    <article id="report-body" class="report">Loading report…</article>
+  </section>
+</main>
+
+<footer class="wrap footer">
+  <p>Built by Lanre Agunloye as a pre-application study for the UNRISK Centre for Doctoral Training. Code written with the help of an AI assistant (Claude, Anthropic) and reviewed by the author. MIT licence.</p>
+</footer>
+
+<div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>

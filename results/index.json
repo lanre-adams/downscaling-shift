@@ -1,0 +1,32 @@
+{
+ "runs": [
+  {
+   "id": "default",
+   "label": "Observed-like warming (0.03 K/yr)",
+   "path": "default/results.json",
+   "warming_rate": 0.03,
+   "shift_K": 0.74,
+   "source": "synthetic",
+   "generated_at": "2026-10-07T13:50:45+00:00"
+  },
+  {
+   "id": "future",
+   "label": "Future-like warming (0.08 K/yr)",
+   "path": "future/results.json",
+   "warming_rate": 0.08,
+   "shift_K": 1.83,
+   "source": "synthetic",
+   "generated_at": "2026-10-07T13:52:02+00:00"
+  },
+  {
+   "id": "stress",
+   "label": "Stress test (0.15 K/yr)",
+   "path": "stress/results.json",
+   "warming_rate": 0.15,
+   "shift_K": 3.37,
+   "source": "synthetic",
+   "generated_at": "2026-10-07T13:53:20+00:00"
+  }
+ ],
+ "updated": "2026-10-07T13:53:20+00:00"
+}

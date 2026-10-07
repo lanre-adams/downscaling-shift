@@ -1,0 +1,34 @@
+services:
+  dashboard:
+    build: .
+    image: downscaling-shift-test:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      # keep runs you start from the dashboard between restarts
+      - shifttest-results:/app/results
+
+  # Run the test suite inside the same image:  docker compose run --rm tests
+  tests:
+    build:
+      context: .
+      args:
+        PREBUILD: "0"
+    environment:
+      SHIFTTEST_NO_AUTORUN: "1"
+    entrypoint: ["python", "-m", "pytest", "-q"]
+    profiles: ["test"]
+
+  # Real data (after running the download scripts into ./data):
+  #   docker compose run --rm realdata
+  realdata:
+    build: .
+    volumes:
+      - ./data:/app/data:ro
+      - ./results:/app/results
+    entrypoint: ["python", "-m", "shifttest", "run", "--preset", "default",
+                 "--coarse", "/app/data/coarse.nc", "--fine", "/app/data/fine.nc", "--out", "/app/results/real"]
+    profiles: ["real"]
+
+volumes:
+  shifttest-results:
